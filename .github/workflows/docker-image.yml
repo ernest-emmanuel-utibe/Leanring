@@ -65,6 +65,16 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: docker-compose build
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+    
+    - name: Push Docker Image
+      run: docker-compose push learning_demo_1:latest
+    
       
     # - name: Install Docker
     #   uses: docker/setup-docker@v2
@@ -76,11 +86,12 @@ jobs:
     #     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     #     sudo chmod +x /usr/local/bin/docker-compose
 
-    - name: Build Docker Image
-      run: docker-compose build
+    # - name: Build Docker Image
+    #   run: docker-compose build
 
-    - name: Login to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+    # - name: Login to Docker Hub
+    #   run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-    - name: Push Docker Image
-      run:  docker-compose push samuel007/samuel007/samuel007/learning_demo_1:latest
+    # - name: Push Docker Image
+    #   run: docker-compose push learning_demo_1:latest
+
