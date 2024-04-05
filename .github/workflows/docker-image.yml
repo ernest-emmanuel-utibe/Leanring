@@ -1,24 +1,57 @@
-name: Build and Push Docker Image
+# name: Build and Push Docker Image
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build-and-push:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v2
+
+#     - name: Build Docker Image
+#       run: docker build .
+
+#     - name: Login to Docker Hub
+#       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+    
+#     - name: Push Docker Image
+#       run: docker push samuel007/learning
+
+
+name: Docker Image CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build-and-push:
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-    - name: Build Docker Image
-      run: docker build .
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Login to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-    
-    - name: Push Docker Image
-      run: docker push samuel007/learning
-
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: samuel007/deploying-project
