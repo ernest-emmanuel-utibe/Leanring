@@ -16,5 +16,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-    # - name: Push Docker Image to Docker Hub
-    #   run: docker push docker push samuel007/learning_demo_1:latest
+    - name: Push Docker Image to Docker Hub
+      run: docker push docker push samuel007/learning_demo_1:latest
