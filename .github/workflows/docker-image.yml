@@ -20,4 +20,5 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
     - name: Push Docker Image to Docker Hub
-      run: docker push samuel007/learning_demo_1:latest
+      # run: docker push samuel007/learning_demo_1:latest
+      run: docker push samuel007/samuel007/samuel007/learning_demo_1:latest
