@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copy the packaged JAR file into the container
-COPY target/learningdemo-0.0.1-SNAPSHOT.jar /app/learningdemo.jar
+COPY target/learningdemo-0.0.1-SNAPSHOT.jar /learningdemo.jar
 
 
 
