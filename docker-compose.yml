@@ -1,3 +1,47 @@
+# version: '3.18'
+
+# services:
+
+#   postgres_db:
+#     image: postgres:alpine
+#     restart: always
+#     networks:
+#       - local
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_USERNAME: postgres
+
+  
+#   pg_admin:
+#     image: dpage/pgadmin4
+#     networks:
+#       - local
+#     ports:
+#       - "5050:80"
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: hello@example.com
+#       PGADMIN_DEFAULT_PASSWORD: world
+
+#   app:
+#     build: .
+#     image : learning-demo
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       - postgres_db
+#     networks:
+#       - local
+   
+
+
+# networks:
+#   local:
+#     name: local
+#     driver: bridge
+
+
 version: '3.18'
 
 services:
@@ -26,7 +70,7 @@ services:
 
   app:
     build: .
-    image : learning-demo
+    image : springboot-example
     ports:
       - "8080:8080"
     depends_on:
